@@ -78,3 +78,6 @@ body {
   .col {
     max-height: 60px;
   }
+  .nav-hd {
+    transition: 3s;
+  }
