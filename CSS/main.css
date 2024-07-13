@@ -174,6 +174,23 @@ transition: 1s;
   color: var(--bs-light) !important;
 }
 
+
+.crd-are{
+  text-align: center;
+  width: 100%;
+}
+
+.crd-are i{
+  font-size: 150px !important;
+  text-align: center;
+  color: white;
+}
+
+
+
+
+
+
 @media (max-width: 767.98px) { 
   input{
     min-width:100% !important;
