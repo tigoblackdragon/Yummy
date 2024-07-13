@@ -21,22 +21,22 @@
     <title>Yummy</title>
   </head>
   <body>
-    <div class="side-nav min-vh-100 position-relative">
+    <div class="side-nav min-vh-100 position-fixed z-3">
       <div
         id="mySidebar"
         class="sidebar d-flex flex-column justify-content-between position-absolute"
       >
-        <div class="nav-hd position-relative brd">
-          <a id="sch" class="sch position-relative " href="#">Search</a>
-          <a class="cag position-relative"  href="#">Categories</a>
-          <a class="are position-relative " href="#">Area</a>
+        <div class="nav-hd position-relative overflow-hidden">
+          <a id="sch" class="sch position-relative" href="#">Search</a>
+          <a class="cag position-relative" href="#">Categories</a>
+          <a class="are position-relative" href="#">Area</a>
           <a class="ing position-relative" href="#">Ingredients</a>
           <a class="cnt position-relative" href="#">Contact Us</a>
         </div>
         <div class="nav-fot">
           <div class="soc-icn">
-            <i class="fab fa-facebook pe-2"></i><i class="fab fa-twitter pe-2"></i
-            ><i class="fas fa-globe"></i>
+            <i class="fab fa-facebook pe-2"></i
+            ><i class="fab fa-twitter pe-2"></i><i class="fas fa-globe"></i>
           </div>
           <div class="cpy-rit d-inline overflow-hidden">
             <p>Copyright Â© 2024 All Rights</p>
@@ -71,7 +71,30 @@
         </div>
       </div>
     </div>
-    <div class="container"></div>
+    <div class="container">
+      <div
+        id="sr-inp"
+        class="input-group d-flex flex-row align-content-between w-100"
+      ></div>
+      <div class="row justify-content-center align-items-center pt-5 pb-5">
+        <div class="loader position-absolute"></div>
+        <div class="col-md-6 col-lg-4 col-xl-3">
+          <div class="card overflow-hidden position-relative mt-4">
+            <img src="img/pexels-xmtnguyen-699953.jpg" class="" alt="..." />
+            <div
+              class="ovr-rly position-absolute d-flex flex-column justify-content-center "
+            >
+              <h2 class="pt-1 mt-0 fs-5 text-center text-dark ">Chiken</h2>
+              <p class="ps-2 fs-6 text-center ">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorum
+                eaque ratione tempora fuga natus quo, quasi magni ducimus
+                blanditiis? Explicabo.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
