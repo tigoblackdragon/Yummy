@@ -6,8 +6,14 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".cag").addEventListener("click", getCategs);
   document.querySelector(".are").addEventListener("click", getAreas);
   document.querySelector(".ing").addEventListener("click", getIngrd);
-  document.querySelector(".cnt").addEventListener("click", dispRegForm);
+  document.querySelector(".cnt").addEventListener("click", dispRegForm); 
+  document.querySelector(".container .row").addEventListener("click", function(e1) {getMealId(e1)});
+  document.querySelector(".container .row").addEventListener("click", function(e2) {getCatId(e2)});
+  document.querySelector(".container .row").addEventListener("click", function(e3) {getAreId(e3)});
+  document.querySelector(".container .row").addEventListener("click", function(e4) {getIngId(e4)});
+  document.querySelector(".pop-meal .fa-xmark").addEventListener("click",clsMeal);
 });
+
 
 function openNav() {
   document.getElementById("mySidebar").style.left = "0";
@@ -54,9 +60,9 @@ function displayMeals(x) {
   } else {
     for (var i = 0; i < x.length; i++) {
       pack += `<div class="col-md-6 col-lg-4 col-xl-3">
-              <div class="card overflow-hidden position-relative mt-4">
-                <img src="${x[i].strMealThumb}" class="" alt="..." />
-                <div
+              <div  data-id="${x[i].idMeal}" class="card overflow-hidden position-relative mt-4">
+                <img  data-id="${x[i].idMeal}" src="${x[i].strMealThumb}" class="" alt="..." />
+                <div data-id="${x[i].idMeal}"
                   class="ovr-rly position-absolute d-flex flex-column justify-content-center"
                 >
                   <h6 class="ps-2 fs-1">${x[i].strMeal}</h6>
@@ -66,6 +72,86 @@ function displayMeals(x) {
     }
   }
   document.querySelector(".container .row").innerHTML = pack;
+}
+
+function getMealId(x){
+  var mealId=x.target.parentElement.getAttribute('data-id');
+    console.log(x.target);
+    console.log(mealId);
+    if(mealId!=0&& !isNaN(parseInt(mealId, 10))){getMealData(mealId);}
+
+  };
+
+async function getMealData(x){
+  try {
+    let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${x}`);
+    let data = await response.json();
+    var meal=data.meals;
+    var mealData=meal[0];
+    dispMeal(mealData);
+
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+function clsMeal(){
+  document.querySelector(".pop-meal").classList.replace("d-flex", "d-none");
+  document.querySelector(".pop-meal .row").innerHTML =" ";
+}
+function trnRight(){
+
+}
+function trnRight(){
+
+}
+
+function dispMeal(x){
+  var pack=``;
+  let mealIng=``;
+  for (i=1;i<=20;i++)
+  {if(x[`strIngredient${i}`]){mealIng+=`<span class="alert alert-info p-1 me-2">${x[`strIngredient${i}`]}</span>`}}
+  let mealMes=``;
+  for (i=1;i<=20;i++)
+  {if(x[`strMeasure${i}`]&&x[`strMeasure${i}`]!==" "){mealMes+=`<span class="alert alert-danger p-1 me-2">${x[`strMeasure${i}`]}</span>`}}
+  pack=`
+            <div class="col-md-4">
+              <div class="card-img p-3">
+                <img
+                  src="${x.strMealThumb}"
+                  width="100%"
+                  alt=""
+                />
+                <h2 class="text-white fs-6">${x.
+                strMeal}</h2>
+              </div>
+            </div>
+            <div class="col-md-8 ps-3 pe-5 pt-5">
+              <div class="card-txt">
+                <h2>Instructions</h2>
+                <p class="text-white">
+                  ${x.strInstructions}
+                </p>
+                <h2>Area : <span>${x.strArea}</span></h2>
+                <h2>Category : <span>${x.strCategory}</span></h2>
+                <h2 class="pb-2">Recipes :</h2>
+                <div class="rec d-flex g-3 flex-wrap text-white">
+                  ${mealIng}
+                </div>
+                <h2 class="pb-2">Tags :</h2>
+                <div class="tag d-flex g-3 flex-wrap text-white">
+                  ${mealMes}
+                </div>
+                <div class="src-tub mt-3 mb-5">
+                  <button class="btn btn-success">Source</button
+                  ><button class="btn btn-danger ms-2">Youtube</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`
+        document.querySelector(".pop-meal").classList.replace("d-none", "d-flex");
+        document.querySelector(".pop-meal .row").innerHTML = pack;
+
 }
 ////////////////////////////////////////////////////////////////////////////
 //search by name
@@ -127,21 +213,24 @@ async function searchByFirst() {
 //////////////////////////////////////////////////////////////////////////////
 //categories
 function displayCategs(x) {
+  document.getElementById(
+    "sr-inp"
+  ).innerHTML ="";
   var pack = ``;
   if (x == null) {
     pack = `<p class="fs-1 text-white fw-bolder">No meals found.</p>`;
   } else {
     for (var i = 0; i < x.length; i++) {
       pack += `<div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="card overflow-hidden position-relative mt-4 bg-black">
-            <img src="${x[i].strCategoryThumb}" class="" alt="..." />
-            <div
+          <div cat-id="${x[i].strCategory}" class="card overflow-hidden position-relative mt-4 bg-black">
+            <img cat-id="${x[i].strCategory}" src="${x[i].strCategoryThumb}" class="" alt="..." />
+            <div cat-id="${x[i].strCategory}"
               class="ovr-rly position-absolute d-flex flex-column justify-content-center "
             >
-              <h2 class="pt-1 mt-0 fs-5 text-center text-dark ">${
+              <h2 cat-id="${x[i].strCategory}" class="pt-1 mt-0 fs-5 text-center text-dark ">${
                 x[i].strCategory
               }</h2>
-              <p class="ps-2 fs-6 text-center ">${x[i].strCategoryDescription
+              <p cat-id="${x[i].strCategory}" class="ps-2 fs-6 text-center ">${x[i].strCategoryDescription
                 .split(" ")
                 .slice(0, 20)
                 .join(" ")}</p>
@@ -167,9 +256,33 @@ async function getCategs() {
     console.error("Error:", error);
   }
 }
+function getCatId(x){
+  var catId=x.target.getAttribute('cat-id');
+    console.log(x.target);
+    console.log(catId);
+    getCategsMeal(catId);
+    
+  };
+async function getCategsMeal(x){
+  try {
+    let response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?c=${x}`
+    );
+    let data = await response.json();
+    malCat = data.meals;
+    console.log(data);
+    if(malCat!=null){displayMeals(malCat)};
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
 //////////////////////////////////////////////////////////////////////////////////////
 //Areas
 function displayAreas(x) {
+  document.getElementById(
+    "sr-inp"
+  ).innerHTML ="";
   var pack = ``;
   if (x == null) {
     pack = `<p class="fs-1 text-white fw-bolder">No meals found.</p>`;
@@ -177,8 +290,8 @@ function displayAreas(x) {
     for (var i = 0; i < x.length; i++) {
       pack += `<div class="col-md-6 col-lg-4 col-xl-3">
           <div class="crd-are pt-3">
-            <i class="fas fa-house-chimney fs-6"></i>
-            <h2 class="pt-1 mt-0 fs-5 text-center text-white">${x[i].strArea}</h2>
+            <i Are-id="${x[i].strArea}" class="fas fa-house-chimney fs-6"></i>
+            <h2 Are-id="${x[i].strArea}" class="pt-1 mt-0 fs-5 text-center text-white">${x[i].strArea}</h2>
           </div>
         </div>`;
     }
@@ -194,8 +307,28 @@ async function getAreas() {
     );
     let data = await response.json();
     allAreas = data.meals;
-    console.log(data);
+    
     displayAreas(allAreas);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+function getAreId(x){
+  var areId=x.target.getAttribute('Are-id');
+    console.log(x.target);
+    console.log(areId);
+    if(areId!=null){getAreMeal(areId);}
+    
+  };
+async function getAreMeal(x){
+  try {
+    let response = await fetch(
+      `https:/www.themealdb.com/api/json/v1/1/filter.php?a=${x}`
+    );
+    let data = await response.json();
+    areCat = data.meals;
+    console.log(areCat);
+    displayMeals(areCat);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -203,6 +336,9 @@ async function getAreas() {
 //////////////////////////////////////////////////////////////////////////////////////
 //Ingredients
 function displayIngrd(x) {
+  document.getElementById(
+    "sr-inp"
+  ).innerHTML ="";
   var pack = ``;
   if (x == null) {
     pack = `<p class="fs-1 text-white fw-bolder">No meals found.</p>`;
@@ -210,12 +346,12 @@ function displayIngrd(x) {
     for (var i = 0; i < x.length; i++) {
       const description = x[i].strDescription || "";
       pack += `<div class="col-md-6 col-lg-4 col-xl-3">
-          <div class="crd-are pt-3">
-            <i class="fas fa-utensils fs-6"></i>
-            <h2 class="pt-1 mt-0 fs-5 text-center text-white">${
+          <div Ing-id="${x[i].strIngredient}" class="crd-are pt-3">
+            <i Ing-id="${x[i].strIngredient}" class="fas fa-utensils fs-6"></i>
+            <h2 Ing-id="${x[i].strIngredient}" class="pt-1 mt-0 fs-5 text-center text-white">${
               x[i].strIngredient
             }</h2>
-            <p class="ps-2 fs-6 text-center text-white">${description
+            <p Ing-id="${x[i].strIngredient}" class="ps-2 fs-6 text-center text-white">${description
               .split(" ")
               .slice(0, 20)
               .join(" ")}</p>
@@ -240,9 +376,32 @@ async function getIngrd() {
     console.error("Error:", error);
   }
 }
+function getIngId(x){
+  var ingId=x.target.getAttribute('Ing-id');
+    console.log(x.target);
+    console.log(ingId);
+    if(ingId!=null){getIngMeal(ingId);}
+    
+  };
+async function getIngMeal(x){
+  try {
+    let response = await fetch(
+      `https://www.themealdb.com/api/json/v1/1/filter.php?i=${x}`
+    );
+    let data = await response.json();
+    ingCat = data.meals;
+    console.log(data);
+    displayMeals(ingCat);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
 //////////////////////////////////////////////////////////////////////////////////////
 //registeration
 function dispRegForm() {
+  document.getElementById(
+    "sr-inp"
+  ).innerHTML ="";
   document.querySelector(".container .row").innerHTML = `<div class="col-md-6">
           <input
             id="nInp"
@@ -317,7 +476,7 @@ function dispRegForm() {
       <button
         id="subBtn"
         disabled=""
-        class="btn btn-outline-danger px-2 mt-3"
+        class="btn btn-outline-danger px-2 mt-3 "
       >
         Submit
       </button>`;

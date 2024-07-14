@@ -36,9 +36,7 @@ body {
     color: white;
     
   }
-  
- 
-  
+   
   #main {
     transition: 1s;
     padding: 2px;
@@ -89,7 +87,7 @@ body {
 .loader {
   width: 100px;
   height: 100px;
-  bottom: 50%;
+  top: 300px;
   left: 50%;
   border-radius: 50%;
   border: 8px solid #d1914b;
@@ -186,8 +184,50 @@ transition: 1s;
   color: white;
 }
 
+img, img+.ovr-rly {
+  cursor: pointer;
+} 
 
-
+i {
+  cursor: pointer;
+}
+#subBtn{
+  margin-top: 30px !important;
+  width: 10% !important;
+ }
+ .meal-crd{
+  width: 90%;
+  min-height: 70vh;
+  background-color: black;
+  top: 100px;
+  left: 60px;
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 .25rem rgba(25, 0, 255, 0.287);
+ }
+ .meal-crd h2{
+  z-index: 99;
+  color: white;
+ }
+.card-img h2{
+  color: white;
+  font-size: 30px !important;
+}
+.meal-crd .fa-xmark{
+  right: 10px;
+  top: 10px;
+  font-size: 20px;
+}
+.meal-crd .fa-angle-right{
+  right: -50px;
+  top: 50%;
+  font-size: 20px;
+}
+.meal-crd .fa-angle-left{
+  left: -50px;
+  top: 50%;
+  font-size: 20px;
+}
 
 
 
@@ -198,4 +238,11 @@ transition: 1s;
     margin-left: 0;
     margin-top: 5px;
   }
+  #subBtn{
+    margin-top: 40px !important;
+    width: 40% !important;
+   }
+   .container {
+    width: 70%;
+   }
  }
