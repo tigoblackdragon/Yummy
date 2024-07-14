@@ -81,12 +81,14 @@ function getMealId(x){
     if(mealId!=0&& !isNaN(parseInt(mealId, 10))){getMealData(mealId);}
 
   };
-
+var mealChk;
 async function getMealData(x){
   try {
     let response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${x}`);
     let data = await response.json();
     var meal=data.meals;
+    console.log(data);
+    mealChk=meal;
     var mealData=meal[0];
     dispMeal(mealData);
 
@@ -99,7 +101,8 @@ function clsMeal(){
   document.querySelector(".pop-meal .row").innerHTML =" ";
 }
 function trnRight(){
-
+  mealchk=meal
+  dispMeal(mealData);
 }
 function trnRight(){
 
