@@ -145,8 +145,9 @@ function dispMeal(x){
                   ${mealMes}
                 </div>
                 <div class="src-tub mt-3 mb-5">
-                  <button class="btn btn-success">Source</button
-                  ><button class="btn btn-danger ms-2">Youtube</button>
+                  
+                  <a href="${x.strSource}" class="btn btn-success">Source</a>
+                  <a href="${x.strYoutube}" class="btn btn-danger ms-2">Youtube</a>
                 </div>
               </div>
             </div>
